@@ -1,0 +1,19 @@
+<div #autocompleteElement class="autocomplete-input" [ngClass]="{'autocomplete-input--opened': openedList}">
+  <label for="company-name">Компания</label>
+  <input id="company-name" type="text" [(ngModel)]="value" name="companyName" (ngModelChange)="changeValue()">
+  <div class="autocomplete-input__list">
+    <ng-container *ngIf="loadList; else companyView">
+      <app-loader></app-loader>
+    </ng-container>
+    <ng-template #companyView>
+      <div class="autocomplete-input__company" *ngFor="let company of companies" (click)="selectCompany(company)">
+        <img [src]="company.logo" alt="Лого">
+        <div class="autocomplete-input__company-info">
+          <div class="autocomplete-input__company-name">{{company.name}}</div>
+          <div class="autocomplete-input__company-domain">{{company.domain}}</div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
